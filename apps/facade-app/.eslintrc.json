@@ -21,7 +21,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "ng-design-patterns",
+            "prefix": "facade-app",
             "style": "kebab-case"
           }
         ]
