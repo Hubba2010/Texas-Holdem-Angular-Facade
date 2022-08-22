@@ -1,0 +1,9 @@
+<div class="card {{ symbolName }}">
+  <span class="card__rank">{{ rank }}</span>
+  <img
+    class="card__img"
+    [src]="'../../assets/img/' + symbolName + '.png'"
+    [alt]="symbolName + ' card'"
+  />
+  <span class="card__rank--inverted">{{ rank }}</span>
+</div>

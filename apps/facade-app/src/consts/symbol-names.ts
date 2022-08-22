@@ -1,0 +1,1 @@
+export const SYMBOL_NAMES = ['spade', 'heart', 'club', 'diamond']
