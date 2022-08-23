@@ -20,7 +20,6 @@ export class CardListComponent {
         this.cardsArray = cards;
       }
     );
-    console.log(this.cardsArray);
   }
 
   CARD_RANKS = CARD_RANKS.slice().reverse();

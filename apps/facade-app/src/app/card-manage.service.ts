@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CARD_RANKS, SYMBOLS } from 'consts';
+import { sortCards } from 'utils/card-sorting-fn';
 import { BehaviorSubject } from 'rxjs';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +17,6 @@ export class CardManageService {
   cardsObject: { [key: number | string]: string } = {};
 
   constructor() {
-    console.log('Facade service works!');
     this.getAllCards();
   }
 
@@ -36,19 +32,15 @@ export class CardManageService {
     this.availableCards$.next(cardsArray);
   }
 
-  public drop(event: CdkDragDrop<string[]>) {
-    console.log(event.previousContainer);
-    console.log(event.container);
+  public drop(event: CdkDragDrop<string[]>): void {
     const previousIndex = +event.previousContainer.element.nativeElement.id.slice(
       -1
     );
     const index = +event.container.element.nativeElement.id.slice(-1);
-    // console.log(index);
     if (
       event.previousContainer === event.container ||
       this.cardsObject[index]
     ) {
-      console.log('foo');
       return;
     } else {
       transferArrayItem(
@@ -65,25 +57,23 @@ export class CardManageService {
       if (this.cardsObject[previousIndex] === this.cardsObject[index]) {
         delete this.cardsObject[previousIndex];
       }
-      console.log(this.cardsObject);
       this.cardsObjectSub$.next(this.cardsObject);
     }
   }
-  public return(event: CdkDragDrop<string[]>) {
-    console.log(event.container);
-    console.log(event.previousContainer);
+  public return(event: CdkDragDrop<string[]>): void {
     const index = +event.previousContainer.element.nativeElement.id.slice(-1);
-    console.log(index);
     if (event.previousContainer === event.container) {
-      console.log('foo');
       return;
     } else {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
-        event.previousIndex,
-        event.currentIndex
+        event.previousContainer.data.indexOf(this.cardsObject[index]),
+        event.previousIndex
       );
+      delete this.cardsObject[index];
+      sortCards(event.container.data);
+      this.cardsObjectSub$.next(this.cardsObject);
     }
   }
 }
