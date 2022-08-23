@@ -11,6 +11,7 @@
     width: $poker-card-width;
     background-color: $white;
     border-radius: 5px;
+    box-shadow: 1px 1px 0 $light-gray;
 
     &__rank {
       position: absolute;

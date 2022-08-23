@@ -1,4 +1,4 @@
-<div class="card {{ symbolName }}">
+<div *ngIf="rank" class="card {{ symbolName }}">
   <span class="card__rank">{{ rank }}</span>
   <img
     class="card__img"

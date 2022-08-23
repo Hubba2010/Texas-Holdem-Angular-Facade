@@ -1,0 +1,14 @@
+<div class="main">
+  <h1 class="main__heading">Podaj siedem kart, aby utworzyć kombinację.</h1>
+
+  <div class="main__holders">
+    <facade-app-holder
+      *ngFor="let holder of [].constructor(7)"
+      cdkDropList
+      [cdkDropListData]="usedCards"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <facade-app-card [rank]="'3'" [symbol]="'♣'" cdkDrag></facade-app-card>
+    </facade-app-holder>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+@import 'colors';
+
+.container {
+  position: relative;
+  height: 123px;
+  width: 88px;
+  border: 2px solid rgb(183, 183, 183);
+  border-radius: 6px;
+  box-shadow: 2px 2px 2px $light-gray;
+
+  .holder {
+    position: absolute;
+    top: 15px;
+    left: 9px;
+    height: 92px;
+    width: 66px;
+    border: 2px solid $casino-red;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px red;
+  }
+}
