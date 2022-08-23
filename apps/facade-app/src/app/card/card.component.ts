@@ -12,8 +12,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent implements OnInit {
-  @Input() rank!: string;
-  @Input() symbol!: string;
+  @Input() rank?: string = '';
+  @Input() symbol?: string = '';
   symbolName?: string;
 
   ngOnInit(): void {

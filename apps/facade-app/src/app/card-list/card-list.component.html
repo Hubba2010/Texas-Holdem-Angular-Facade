@@ -1,7 +1,7 @@
 <div
   cdkDropList
   [cdkDropListData]="cardsArray"
-  (cdkDropListDropped)="drop($event)"
+  (cdkDropListDropped)="returnCard($event)"
   class="card-list"
 >
   <facade-app-card

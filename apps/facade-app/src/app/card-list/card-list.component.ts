@@ -26,7 +26,7 @@ export class CardListComponent {
   CARD_RANKS = CARD_RANKS.slice().reverse();
   SYMBOL_NAMES = SYMBOL_NAMES;
 
-  drop(event: CdkDragDrop<string[]>) {
-    this.facadeService.drop(event);
+  returnCard(event: CdkDragDrop<string[]>) {
+    this.facadeService.return(event);
   }
 }

@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CardManageService } from 'app/card-manage.service';
-import { Subscription } from 'rxjs';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -10,17 +9,11 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainComponent {
-  subscription$: Subscription;
   usedCards: string[] = [];
-  constructor(private facadeService: CardManageService) {
-    this.subscription$ = this.facadeService.usedCards$.subscribe(
-      (cards: string[]) => {
-        this.usedCards = cards;
-      }
-    );
-  }
+  cardsObject$ = this.facadeService.cardsObjectSub$;
+  constructor(private facadeService: CardManageService) {}
 
-  drop(event: CdkDragDrop<string[]>) {
+  dropCard(event: CdkDragDrop<string[]>) {
     this.facadeService.drop(event);
   }
 }

@@ -14,7 +14,10 @@ export class CardManageService {
   availableCards$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(
     []
   );
-  usedCards$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  cardsObjectSub$: BehaviorSubject<{
+    [key: number | string]: string;
+  }> = new BehaviorSubject<{ [key: number | string]: string }>({});
+  cardsObject: { [key: number | string]: string } = {};
 
   constructor() {
     console.log('Facade service works!');
@@ -34,8 +37,43 @@ export class CardManageService {
   }
 
   public drop(event: CdkDragDrop<string[]>) {
+    console.log(event.previousContainer);
+    console.log(event.container);
+    const previousIndex = +event.previousContainer.element.nativeElement.id.slice(
+      -1
+    );
+    const index = +event.container.element.nativeElement.id.slice(-1);
+    // console.log(index);
+    if (
+      event.previousContainer === event.container ||
+      this.cardsObject[index]
+    ) {
+      console.log('foo');
+      return;
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+      this.cardsObject = {
+        ...this.cardsObject,
+        [index]: this.cardsObject[previousIndex] || event.container.data[0],
+      };
+
+      if (this.cardsObject[previousIndex] === this.cardsObject[index]) {
+        delete this.cardsObject[previousIndex];
+      }
+      console.log(this.cardsObject);
+      this.cardsObjectSub$.next(this.cardsObject);
+    }
+  }
+  public return(event: CdkDragDrop<string[]>) {
     console.log(event.container);
     console.log(event.previousContainer);
+    const index = +event.previousContainer.element.nativeElement.id.slice(-1);
+    console.log(index);
     if (event.previousContainer === event.container) {
       console.log('foo');
       return;
