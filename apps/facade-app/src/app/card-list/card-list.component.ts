@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { CardManageService } from 'app/card-manage.service';
+import { ManagementService } from 'app/management.service';
 import { CARD_RANKS, SYMBOL_NAMES } from 'consts';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ export class CardListComponent implements OnDestroy {
   availableCards$ = this.facadeService.availableCards$;
   cardsArray: string[] = [];
 
-  constructor(private facadeService: CardManageService) {
+  constructor(private facadeService: ManagementService) {
     this.subscription$ = this.facadeService.availableCards$.subscribe(
       (cards: string[]) => {
         this.cardsArray = cards;

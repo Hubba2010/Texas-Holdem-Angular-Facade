@@ -1,6 +1,5 @@
 <div class="main">
   <h1 class="main__heading">Podaj siedem kart, aby utworzyć kombinację.</h1>
-  <!-- *ngIf="{ cardsObject: cardsObject$ | async } as asyncData" -->
   <div class="main__holders">
     <facade-app-holder
       *ngFor="let holder of [].constructor(7); let i = index"
@@ -27,13 +26,20 @@
     </facade-app-holder>
   </div>
   <div class="main__btns">
-    <facade-app-button class="main__btns--reset" [type]="BTN_TYPES.SECONDARY" (clicked)="resetCards()"
+    <facade-app-button
+      class="main__btns--reset"
+      [type]="BTN_TYPES.SECONDARY"
+      (clicked)="resetCards()"
       >RESET KOMBINACJI</facade-app-button
     >
     <facade-app-button
       [type]="BTN_TYPES.PRIMARY"
       [isDisabled]="usedCards.length !== 7"
+      (clicked)="checkCombination()"
       >SPRAWDŹ KOMBINACJĘ</facade-app-button
     >
   </div>
+  <h2 *ngIf="combinationName" class="main__combination">
+    {{ combinationName }}
+  </h2>
 </div>

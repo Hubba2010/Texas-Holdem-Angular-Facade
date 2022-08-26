@@ -15,3 +15,9 @@ body {
     background-image: url(../assets/img/casino-xl.jpg);
   }
 }
+
+@media (max-width < $min-width-1024) {
+  body {
+    height: 120vh;
+  }
+}

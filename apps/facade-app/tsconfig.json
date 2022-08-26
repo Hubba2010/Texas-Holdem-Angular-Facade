@@ -14,6 +14,8 @@
     }
   ],
   "compilerOptions": {
+    "allowJs": true,
+    "outDir": "../dist",
     "baseUrl": "src",
     "target": "es2020",
     "forceConsistentCasingInFileNames": true,

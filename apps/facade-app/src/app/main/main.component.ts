@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CardManageService } from 'app/card-manage.service';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { ManagementService } from 'app/management.service';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { BTN_TYPES } from 'consts';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'facade-app-main',
@@ -9,18 +10,34 @@ import { BTN_TYPES } from 'consts';
   styleUrls: ['./main.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainComponent {
+export class MainComponent implements OnDestroy {
   BTN_TYPES = BTN_TYPES;
-  usedCards: string[] = [];
+  subscription$: Subscription;
+  combinationName = '';
   cardsObject$ = this.facadeService.cardsObjectSub$;
-  constructor(private facadeService: CardManageService) {}
+  usedCards: string[] = [];
+  constructor(private facadeService: ManagementService) {
+    this.subscription$ = this.facadeService.combinationName$.subscribe(
+      (combination) => {
+        this.combinationName = combination;
+      }
+    );
+  }
 
-  dropCard(event: CdkDragDrop<string[]>) {
+  dropCard(event: CdkDragDrop<string[]>): void {
     this.facadeService.drop(event);
   }
 
-  resetCards() {
+  resetCards(): void {
     this.facadeService.reset();
     this.usedCards = [];
+  }
+
+  checkCombination(): void {
+    this.facadeService.checkCombination();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
   }
 }

@@ -3,17 +3,19 @@ import { CARD_RANKS, SYMBOLS } from 'consts';
 import { sortCards } from 'utils/card-sorting-fn';
 import { BehaviorSubject } from 'rxjs';
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
+import { checkCombination } from '../utils/check-combination-min';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CardManageService {
+export class ManagementService {
   availableCards$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(
     []
   );
   cardsObjectSub$: BehaviorSubject<{
     [key: number | string]: string;
   }> = new BehaviorSubject<{ [key: number | string]: string }>({});
+  combinationName$: BehaviorSubject<string> = new BehaviorSubject<string>('');
   cardsObject: { [key: number | string]: string } = {};
   combination: string[] = [];
 
@@ -79,10 +81,16 @@ export class CardManageService {
     }
   }
 
-  reset() {
+  reset(): void {
     this.cardsObjectSub$.next({});
     this.cardsObject = {};
     this.combination = [];
+    this.combinationName$.next('');
     this.getAllCards();
+  }
+
+  checkCombination(): void {
+    const combinationName = checkCombination(this.combination).type;
+    this.combinationName$.next(combinationName);
   }
 }
