@@ -7,6 +7,7 @@
       cdkDropList
       [cdkDropListData]="usedCards"
       (cdkDropListDropped)="dropCard($event)"
+      cdkDropListSortingDisabled="true"
     >
       <ng-container *ngIf="(cardsObject$ | async)![i + 1]">
         <facade-app-card
@@ -24,5 +25,15 @@
         ></facade-app-card>
       </ng-container>
     </facade-app-holder>
+  </div>
+  <div class="main__btns">
+    <facade-app-button [type]="BTN_TYPES.SECONDARY"
+      >RESET KOMBINACJI</facade-app-button
+    >
+    <facade-app-button
+      [type]="BTN_TYPES.PRIMARY"
+      [isDisabled]="usedCards.length !== 7"
+      >SPRAWDŹ KOMBINACJĘ</facade-app-button
+    >
   </div>
 </div>

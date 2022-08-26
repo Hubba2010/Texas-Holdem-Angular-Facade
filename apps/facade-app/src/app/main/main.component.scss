@@ -4,6 +4,7 @@
 
   .main {
     width: 100%;
+    font-family: 'Merriweather', sans-serif;
     margin-top: 100px;
     max-width: 1100px;
 
@@ -18,5 +19,14 @@
       display: flex;
       justify-content: space-around;
     }
+
+    &__btns {
+      margin-top: 50px;
+      display: flex;
+      justify-content: space-evenly;
+    }
   }
+}
+.cdk-drop-list-dragging .cdk-drag.cdk-drag-placeholder {
+  display: none !important;
 }

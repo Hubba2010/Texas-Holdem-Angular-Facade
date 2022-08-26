@@ -15,12 +15,13 @@ export class CardManageService {
     [key: number | string]: string;
   }> = new BehaviorSubject<{ [key: number | string]: string }>({});
   cardsObject: { [key: number | string]: string } = {};
+  combination: string[] = [];
 
   constructor() {
     this.getAllCards();
   }
 
-  getAllCards() {
+  getAllCards(): void {
     const cardsArray: string[] = [];
     const reversedRanks = CARD_RANKS.slice().reverse();
     SYMBOLS.forEach((symbol) => {
@@ -28,11 +29,10 @@ export class CardManageService {
         cardsArray.push(`${rank}${symbol}`);
       });
     });
-    console.log(cardsArray);
     this.availableCards$.next(cardsArray);
   }
 
-  public drop(event: CdkDragDrop<string[]>): void {
+  drop(event: CdkDragDrop<string[]>): void {
     const previousIndex = +event.previousContainer.element.nativeElement.id.slice(
       -1
     );
@@ -58,9 +58,10 @@ export class CardManageService {
         delete this.cardsObject[previousIndex];
       }
       this.cardsObjectSub$.next(this.cardsObject);
+      this.combination = Object.values(this.cardsObject);
     }
   }
-  public return(event: CdkDragDrop<string[]>): void {
+  return(event: CdkDragDrop<string[]>): void {
     const index = +event.previousContainer.element.nativeElement.id.slice(-1);
     if (event.previousContainer === event.container) {
       return;
@@ -74,6 +75,7 @@ export class CardManageService {
       delete this.cardsObject[index];
       sortCards(event.container.data);
       this.cardsObjectSub$.next(this.cardsObject);
+      this.combination = Object.values(this.cardsObject);
     }
   }
 }

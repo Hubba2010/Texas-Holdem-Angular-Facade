@@ -4,3 +4,15 @@
   gap: 10px;
   margin: 20px 40px;
 }
+
+.cdk-drag:not(.cdk-drag-preview) {
+  transform: none !important;
+}
+
+.cdk-drag.cdk-drag-placeholder {
+  display: none;
+}
+
+.card-list .cdk-drag.cdk-drag-placeholder {
+  display: block !important;
+}

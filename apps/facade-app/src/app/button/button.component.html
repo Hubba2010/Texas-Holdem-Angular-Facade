@@ -1,0 +1,11 @@
+<button
+  class="btn"
+  [ngClass]="{
+    'btn--primary': type === BTN_TYPES.PRIMARY,
+    'btn--secondary': type === BTN_TYPES.SECONDARY,
+    disabled: isDisabled
+  }"
+  (click)="click()"
+>
+  <ng-content></ng-content>
+</button>
