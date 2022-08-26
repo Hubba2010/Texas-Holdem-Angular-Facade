@@ -27,7 +27,7 @@
     </facade-app-holder>
   </div>
   <div class="main__btns">
-    <facade-app-button [type]="BTN_TYPES.SECONDARY"
+    <facade-app-button class="main__btns--reset" [type]="BTN_TYPES.SECONDARY" (clicked)="resetCards()"
       >RESET KOMBINACJI</facade-app-button
     >
     <facade-app-button

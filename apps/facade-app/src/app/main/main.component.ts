@@ -18,4 +18,9 @@ export class MainComponent {
   dropCard(event: CdkDragDrop<string[]>) {
     this.facadeService.drop(event);
   }
+
+  resetCards() {
+    this.facadeService.reset();
+    this.usedCards = [];
+  }
 }

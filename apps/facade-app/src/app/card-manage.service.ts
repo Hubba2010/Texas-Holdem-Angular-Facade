@@ -78,4 +78,11 @@ export class CardManageService {
       this.combination = Object.values(this.cardsObject);
     }
   }
+
+  reset() {
+    this.cardsObjectSub$.next({});
+    this.cardsObject = {};
+    this.combination = [];
+    this.getAllCards();
+  }
 }
