@@ -48,7 +48,6 @@
       &:hover::after {
         opacity: 1;
         transform: scale(10);
-        // transform: scale(1) translate(-10px, -70px);
       }
     }
     &.disabled {
