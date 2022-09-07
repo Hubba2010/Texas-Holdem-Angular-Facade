@@ -8,18 +8,10 @@
       (cdkDropListDropped)="dropCard($event)"
       cdkDropListSortingDisabled="true"
     >
-      <ng-container *ngIf="(cardsObject$ | async)![i + 1]">
+      <ng-container *ngIf="(cardsObject$ | async)![i + 1] as card">
         <facade-app-card
-          [rank]="
-            (cardsObject$ | async)![i + 1].length > 2
-              ? (cardsObject$ | async)![i + 1].substring(0, 2)
-              : (cardsObject$ | async)![i + 1][0]
-          "
-          [symbol]="
-            (cardsObject$ | async)![i + 1].length > 2
-              ? (cardsObject$ | async)![i + 1][2]
-              : (cardsObject$ | async)![i + 1][1]
-          "
+          [rank]="card.length > 2 ? card.substring(0, 2) : card[0]"
+          [symbol]="card.length > 2 ? card[2] : card[1]"
           cdkDrag
         ></facade-app-card>
       </ng-container>
