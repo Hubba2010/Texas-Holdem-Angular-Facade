@@ -1,19 +1,19 @@
 @import 'colors';
+@import 'sizes';
 
 .container {
-  position: relative;
-  height: 123px;
-  width: 88px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: $poker-card-height * 1.4;
+  width: $poker-card-width * 1.4;
   border: 2px solid $light-gray-1;
   border-radius: 6px;
   box-shadow: 2px 2px 2px $light-gray;
 
   .holder {
-    position: absolute;
-    top: 15px;
-    left: 9px;
-    height: 92px;
-    width: 66px;
+    height: $poker-card-height * 1.04;
+    width: $poker-card-width * 1.04;
     border: 2px solid $casino-red;
     border-radius: 5px;
     box-shadow: 1px 1px 1px red;

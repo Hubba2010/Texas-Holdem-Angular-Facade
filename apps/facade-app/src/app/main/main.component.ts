@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ManagementService } from 'app/management.service';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { BTN_TYPES } from 'consts';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'facade-app-main',
@@ -10,19 +9,12 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./main.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainComponent implements OnDestroy {
+export class MainComponent {
   BTN_TYPES = BTN_TYPES;
-  subscription$: Subscription;
-  combinationName = '';
+  combinationName$ = this.facadeService.combinationName$;
   cardsObject$ = this.facadeService.cardsObjectSub$;
   usedCards: string[] = [];
-  constructor(private facadeService: ManagementService) {
-    this.subscription$ = this.facadeService.combinationName$.subscribe(
-      (combination) => {
-        this.combinationName = combination;
-      }
-    );
-  }
+  constructor(private facadeService: ManagementService) {}
 
   dropCard(event: CdkDragDrop<string[]>): void {
     this.facadeService.drop(event);
@@ -35,9 +27,5 @@ export class MainComponent implements OnDestroy {
 
   checkCombination(): void {
     this.facadeService.checkCombination();
-  }
-
-  ngOnDestroy(): void {
-    this.subscription$.unsubscribe();
   }
 }

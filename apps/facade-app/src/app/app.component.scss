@@ -9,9 +9,3 @@
     color: red;
   }
 }
-
-@media (max-width < $min-width-1024) {
-  :host {
-    height: 120vh;
-  }
-}

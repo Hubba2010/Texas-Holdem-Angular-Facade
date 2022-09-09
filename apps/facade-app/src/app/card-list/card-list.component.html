@@ -1,13 +1,13 @@
 <div
-  *ngIf="{ availableCards: availableCards$ | async } as asyncData"
+  *ngIf="availableCards$ | async as availableCards"
   cdkDropList
-  [cdkDropListData]="cardsArray"
+  [cdkDropListData]="availableCards"
   (cdkDropListDropped)="returnCard($event)"
   cdkDropListSortingDisabled="true"
   class="card-list"
 >
   <facade-app-card
-    *ngFor="let card of asyncData.availableCards"
+    *ngFor="let card of availableCards"
     cdkDrag
     [rank]="card.length > 2 ? card.substring(0, 2) : card[0]"
     [symbol]="card.length > 2 ? card[2] : card[1]"
