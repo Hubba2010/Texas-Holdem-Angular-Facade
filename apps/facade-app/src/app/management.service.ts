@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { CARD_RANKS, SYMBOLS } from 'consts';
-import { sortCards } from 'utils/card-sorting-fn';
-import { BehaviorSubject } from 'rxjs';
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
-import { checkCombination } from '../utils/check-combination-min';
+import { BehaviorSubject } from 'rxjs';
+import { CARD_RANKS, SYMBOLS } from 'consts';
+import { checkCombination } from '../utils/check-combination';
+import { sortCards } from 'utils/card-sorting-fn';
 
 @Injectable({
   providedIn: 'root',
